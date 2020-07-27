@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="drds" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+		<property name="url" value="jdbc:mysql://localhost:3306/orcl"/>
+		<property name="username" value="root"/>
+		<property name="password" value="sravs"/>
+	</bean>
+	<bean id="batsmanRegDAO" class="com.santhosh.dao.BatsmanRegistrationDAOImpl">
+		<constructor-arg ref="drds"/>
+	</bean>
+	<bean id="batsmanRegService" class="com.santhosh.service.BatsmanRegistrationServiceImpl">
+		<constructor-arg ref="batsmanRegDAO"/>
+	</bean>
+	<bean id="batsmanRegController" class="com.santhosh.controller.BatsmanController">
+		<constructor-arg ref="batsmanRegService"/>
+	</bean>
+</beans>
